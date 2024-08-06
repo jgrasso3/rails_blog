@@ -1,0 +1,1 @@
+partial: way to store a section of template that can be dropped in using a `<% render '<path>' %>`
