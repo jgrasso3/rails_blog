@@ -24,6 +24,8 @@ rails g ...
   * drop
   * seed
     * run seeds.rb to create bummy data
+* rails routes
+  * displays all available routes
 
 partial: way to store a section of template that can be dropped in using a `<% render '<path>' %>`
 
@@ -41,6 +43,17 @@ Model View Controller
     * for delete on cascade add `, dependent: :destroy`
 
 ### View
+
+* link_to
+  * replaces `<a>` tags
+  * `<%= link_to "Edit", nil, remote: true, class:"btn btn-warning" %>`
+    * remote true means do something, but on the server
+  * `<%= button_to "Delete", [post, comment], class: "btn btn-danger", method: :delete %>`
+    * deletes need to use `button_to` and need to link to the delete method
+  * paths
+    * `[post, comment]` equates to pID/cID
+    * `edit_post_path(@post)`
+    * `nil`: redirect nowhere
 
 ### Controller
 
@@ -61,7 +74,14 @@ db:seed
 
 ## Routes
 
-rails routes
+`rails routes`
+
+creates nested resource routes like update for us
+```rb
+resources :posts do
+  resources :comments
+end
+```
 
 ## Bootstrap
 
@@ -97,3 +117,26 @@ add devise to Gemfile
 ## Action Text
 
 `rails action_text:install` -> `bundle install` -> migrate
+
+## Stimulus
+
+`app/javascript`
+
+* controllers
+  * funcs
+    * initialize: only runs once
+    * connect: only fires when it connects to rails app
+    * custom_func
+      * need to link js file to your view with a `data` key
+        * `controller` name of your js file
+        * `action` name of your func
+        * passing custom data like IDs
+          * `comments_form_param: "edit-form#{comment.id}",` -> js `event.params["form"]`
+
+```html.erb
+<%= link_to "Edit", nil, remote: true, class:"btn btn-warning", 
+data: {
+  controller: "comments",
+  action: "comments#toggleForm"
+}%>
+```
