@@ -9,7 +9,7 @@ export default class extends Controller {
     event.preventDefault();
     event.stopPropagation();
 
-    const formID = event.params["form"];
+    const formID = event.params["form"]; // from comments_form_param: "edit-form-#{comment.id}" in _comment.html.erb
     const commentBodyID = event.params["body"];
 
     // toggle d-none class on edit form and body

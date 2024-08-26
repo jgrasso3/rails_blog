@@ -5,12 +5,20 @@
 #   gem "sqlite3"
 #
 default: &default
-  adapter: sqlite3
+  adapter: postgresql
+  encoding: unicode
+  username: postgres
+  password: mysecretpassword
+  host: localhost
+  port: 5432
+  database: postgres
+  # database: 'postgres://postgres:mysecretpassword@localhost:5432/postgres'
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
 development:
   <<: *default
+  adapter: sqlite3
   database: storage/development.sqlite3
 
 # Warning: The database defined as "test" will be erased and
